@@ -7,7 +7,7 @@ include_once "php/connection.php";
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PICAB ref | Receipts</title>
+    <title>PICAB ref | Team</title>
     <style>
         @font-face {
             font-family: myFirstFont;
@@ -99,10 +99,10 @@ include_once "php/connection.php";
                     <li>
                         <a href="hardware.php"><i class="fa fa-microchip"></i> <span class="nav-label">Hardware</span></a>
                     </li>
-                    <li class="active">
+                    <li>
                         <a href="Receipts.php"><i class="fa fa-cog fa-spin fa-1x"></i> <span class="nav-label">Receipts</span></a>
                     </li>
-                    <li>
+                    <li class="active">
                         <a href="PICABteam.php"><i class="fa fa-users fa-1x"></i> <span class="nav-label">PICAB team</span></a>
                     </li>
                 </ul>
@@ -168,13 +168,12 @@ include_once "php/connection.php";
         </div>
         <div class="row wrapper border-bottom white-bg page-heading animated fadeInLeftBig">
             <div class="col-sm-4">
-                <h2><p>Receipts</p></h2>
+                <h2><p>PICAB team</p></h2>
             </div>
             <div class="col-sm-8">
                 <font face="myFirstFont">
                     <div class="title-action">
-                        <button class="btn btn-primary " type="button" data-toggle="modal" data-target="#addimport"><i class="fa fa-plus"></i> Imoprt</button>
-                        <button class="btn btn-primary " type="button" data-toggle="modal" data-target="#addexport"><i class="fa fa-minus"></i> Export</button>
+                        <button class="btn btn-primary " type="button" data-toggle="modal" data-target="#addadministrator"><i class="fa fa-plus"></i> Add</button>
                     </div>
                 </font>
             </div>
@@ -199,174 +198,69 @@ include_once "php/connection.php";
                                         <tr>
                                             <th>extn</th>
                                             <th style="width:1em"></th>
-                                            <th style="width:1em"></th>
                                             <th style="width:1em"></th><!--order column-->
-                                            <th>From</th>
-                                            <th>To</th>
-                                            <th>Sign</th>
-                                            <th>Date</th>
-                                            <th>Type</th>
+                                            <th>Name</th>
+                                            <th>App ID</th>
+                                            <th>App PW</th>
+                                            <th>Role</th>
+                                            <th>pros</th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         <?php
                                         $result22 = mysqli_query($con,"
-                                                Select receipt.receiptid,
-                                                  receipt.receiptdate,
-                                                  receipt.receipttype,
-                                                  receipt.receiptsign,
-                                                  receipt.createddate,
-                                                  receipt.toid,
-                                                  receipt.fromid
-                                                From receipt") or die(mysqli_error($con));
+                                                Select administrator.administratorid,
+                                                  administrator.administratorname,
+                                                  administrator.administratorappid,
+                                                  administrator.administratorapppw,
+                                                  administrator.administratorrole
+                                                From administrator") or die(mysqli_error($con));
                                         while($row22 = mysqli_fetch_assoc($result22)) {
                                             ?>
-                                            <tr data-child-value="
-                                             <?php
-                                            if ($row22['receipttype'] == 1){
-                                                $result2 = mysqli_query($con,"
-Select Count(ownitem.ownitemid) As countitem,
-  ownitem.ownitemname,
-  ownitem.ownitemtype,
-  owncategory.owncategoryname,
-  receipt.receiptid
-From ownitem
-  Inner Join receipt On receipt.receiptid = ownitem.receiptinid
-  Inner Join owncategory On ownitem.owncategoryid = owncategory.owncategoryid
-Where receipt.receiptid = $row22[receiptid] AND ownitem.ownitemtype = '1'
-Group By ownitem.ownitemname,
-  owncategory.owncategoryname,
-  receipt.receiptid") or die(mysqli_error($con));
-                                                while($row2 = mysqli_fetch_assoc($result2)) {
-                                                    echo $row2['countitem']." - ".$row2['owncategoryname']." - ".$row2['ownitemname'];
-                                                    if (mysqli_num_rows($result2) > 1) {
-                                                        echo "<br>";
-                                                    }
-                                                }
-                                            }else{
-                                                $result2 = mysqli_query($con,"
-Select Count(ownitem.ownitemid) As countitem,
-  ownitem.ownitemname,
-  ownitem.ownitemtype,
-  owncategory.owncategoryname,
-  receipt.receiptid
-From ownitem
-  Inner Join receipt On receipt.receiptid = ownitem.receiptoutid
-  Inner Join owncategory On ownitem.owncategoryid = owncategory.owncategoryid
-Where receipt.receiptid = $row22[receiptid] AND ownitem.ownitemtype = '2'
-Group By ownitem.ownitemname,
-  owncategory.owncategoryname,
-  receipt.receiptid") or die(mysqli_error($con));
-                                                while($row2 = mysqli_fetch_assoc($result2)) {
-                                                    echo $row2['countitem']." - ".$row2['owncategoryname']." - ".$row2['ownitemname'];
-                                                    if (mysqli_num_rows($result2) > 1) {
-                                                        echo "<br>";
-                                                    }
-                                                }
-                                            }
+                                            <tr data-child-value=""> <!--info plus-->
+                                                <td><!--search in info plus-->
 
-                                            ?> ">
-                                                <td>
-                                                    <?php
-                                                    if ($row22['receipttype'] == 1){
-                                                        $result2 = mysqli_query($con,"
-Select Count(ownitem.ownitemid) As countitem,
-  ownitem.ownitemname,
-  ownitem.ownitemtype,
-  owncategory.owncategoryname,
-  receipt.receiptid
-From ownitem
-  Inner Join receipt On receipt.receiptid = ownitem.receiptinid
-  Inner Join owncategory On ownitem.owncategoryid = owncategory.owncategoryid
-Where receipt.receiptid = $row22[receiptid] AND ownitem.ownitemtype = '1'
-Group By ownitem.ownitemname,
-  owncategory.owncategoryname,
-  receipt.receiptid") or die(mysqli_error($con));
-                                                        while($row2 = mysqli_fetch_assoc($result2)) {
-                                                            echo $row2['countitem']." - ".$row2['owncategoryname']." - ".$row2['ownitemname'];
-
-                                                        }
-                                                    }else{
-                                                        $result2 = mysqli_query($con,"
-Select Count(ownitem.ownitemid) As countitem,
-  ownitem.ownitemname,
-  ownitem.ownitemtype,
-  owncategory.owncategoryname,
-  receipt.receiptid
-From ownitem
-  Inner Join receipt On receipt.receiptid = ownitem.receiptoutid
-  Inner Join owncategory On ownitem.owncategoryid = owncategory.owncategoryid
-Where receipt.receiptid = $row22[receiptid] AND ownitem.ownitemtype = '2'
-Group By ownitem.ownitemname,
-  owncategory.owncategoryname,
-  receipt.receiptid") or die(mysqli_error($con));
-                                                        while($row2 = mysqli_fetch_assoc($result2)) {
-                                                            echo $row2['countitem']." - ".$row2['owncategoryname']." - ".$row2['ownitemname'];
-                                                        }
-                                                    }
-                                                    ?>
-                                                </td>
-                                                <td>
-                                                    <div class="lightBoxGallery">
-                                                        <?php
-                                                        $query = "SELECT * FROM `image` WHERE `receiptid` = $row22[receiptid]";
-                                                        $results = mysqli_query($con, $query);
-
-                                                        foreach ($results as $newresults) {
-                                                            ?>
-                                                            <a href="data:image/jpeg;base64, <?php echo base64_encode($newresults['imagedata']) ?>" title="Image from Unsplash" data-gallery="#<?php echo $row22['receiptid'] ?>"><i class="fa fa-eye  fa-2x"></i></a>
-                                                            <?php
-                                                        } ?>
-                                                    </div>
                                                 </td>
                                                 <td class="details-control"></td>
-                                                <td><?php echo $row22['receiptid'] ?></td><!--order column-->
-                                                <td class="middle wrap"><!--from-->
-                                                    <?php
-                                                    if ($row22['receipttype'] == 1){
-                                                            $result222 = mysqli_query($con,"Select `from`.fromname From `from` Where `from`.fromid = $row22[fromid]") or die(mysqli_error($con));
-                                                        while($row222 = mysqli_fetch_assoc($result222)) {
-                                                            echo $row222['fromname'];
-                                                        }
-                                                    }
-                                                    else{
-                                                        echo "Alex pic";
-                                                    }
-                                                    ?>
-                                                </td>
-                                                <td class="middle wrap"><!--to-->
-                                                    <?php
-                                                    if ($row22['receipttype'] == 1){
-                                                        echo "Alex pic";
-                                                    }else{
-                                                        $result222 = mysqli_query($con,"Select prosecution.prosecutionname From prosecution Where prosecution.prosecutionid = $row22[toid]") or die(mysqli_error($con));
-                                                        while($row222 = mysqli_fetch_assoc($result222)) {
-                                                            echo $row222['prosecutionname'];
-                                                        }
-                                                    }
-                                                    ?>
-                                                </td>
-                                                <td class="middle wrap"><font size="3"><?php
-                                                        if ($row22['receipttype'] == 1){
-                                                            $result2221 = mysqli_query($con,"Select administrator.administratorname From administrator Where administrator.administratorid = $row22[receiptsign]") or die(mysqli_error($con));
-                                                            while($row2221 = mysqli_fetch_assoc($result2221)) {
-                                                                echo $row2221['administratorname'];
-                                                            }                                                        }else{
-                                                            echo $row22['receiptsign'];
-                                                        }
-                                                        ?></font></td>
-                                                <td class="middle wrap"><font size="3"><?php echo $row22['receiptdate'] ?></font></td>
+                                                <td><?php echo $row22['administratorid'] ?></td><!--order column-->
                                                 <td class="middle wrap">
-
-                                                    <font size="3">
-                                                        <?php
-                                                        if ($row22['receipttype'] == 1){
-                                                            echo "Import";
+                                                    <?php echo $row22['administratorname'] ?>
+                                                </td>
+                                                <td class="middle wrap">
+                                                    <?php echo $row22['administratorappid'] ?>
+                                                </td>
+                                                <td class="middle wrap">
+                                                    <?php echo $row22['administratorapppw'] ?>
+                                                </td>
+                                                <td class="middle wrap">
+                                                    <?php
+                                                        if ($row22['administratorrole'] == 1){
+                                                            echo "Administrator";
+                                                        }elseif($row22['administratorrole'] == 2){
+                                                            echo "Power user";
                                                         }else{
-                                                            echo "Export";
+                                                            echo "User";
                                                         }
+                                                    ?>
+                                                </td>
+                                                <td class="middle wrap">
+                                                    <?php
+                                                    $prosresult = mysqli_query($con, "Select prosecution.prosecutionname,
+  prosecution.prosecutionid
+From administrator_has_prosecution
+  Inner Join prosecution On prosecution.prosecutionid =
+    administrator_has_prosecution.prosecutionid
+  Inner Join administrator On administrator_has_prosecution.administratorid =
+    administrator.administratorid
+Where administrator.administratorid = $row22[administratorid]");
+                                                    while ($pros = $prosresult->fetch_assoc()) {
+                                                        $prosecutionid= $pros['prosecutionid'];
+                                                        $prosecutionname = $pros['prosecutionname'];
                                                         ?>
-                                                    </font>
+                                                        <a class="btn btn-success btn-rounded  btn-xs" href="#"><?php echo $prosecutionname; ?></a>
+<?php
+                                                    };
+                                                    ?>
                                                 </td>
                                             </tr>
                                             <?php
@@ -375,9 +269,9 @@ Group By ownitem.ownitemname,
                                         </tbody>
                                         <tfoot>
                                         <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
+
+                                            <th></th>
+                                            <th></th>
                                             <th></th>
                                             <th></th>
                                             <th></th>
@@ -486,12 +380,6 @@ Group By ownitem.ownitemname,
                         </div>
                         <div class="hr-line-dashed"></div>
                         Items
-                        <div class="right">
-                            <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#addowncategory">
-                                <i class="fa fa-plus">Add a new category</i>
-                            </button>
-                        </div>
-
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Item</label>
                             <div class="col-sm-10">
@@ -521,20 +409,20 @@ Group By ownitem.ownitemname,
                                 </div>
                             </div>
                         </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="pull-left">
+                        <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
                     </div>
-                    <div class="modal-footer">
-                        <div class="pull-left">
-                            <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
-                        </div>
-                        <button class="btn" type="reset">
-                            <i class="ace-icon fa fa-undo bigger-110"></i>
-                            Reset
-                        </button>
-                        <button class="btn btn-info"  type="Submit"  name="submit">
-                            <i class="ace-icon fa fa-check bigger-110"></i>
-                            Submit
-                        </button>
-                    </div>
+                    <button class="btn" type="reset">
+                        <i class="ace-icon fa fa-undo bigger-110"></i>
+                        Reset
+                    </button>
+                    <button class="btn btn-info"  type="Submit"  name="submit">
+                        <i class="ace-icon fa fa-check bigger-110"></i>
+                        Submit
+                    </button>
+                </div>
                 </form>
             </div>
         </div>
@@ -609,22 +497,22 @@ Group By ownitem.ownitemname,
                                 <div class="input-group">
                                     <select id="hardwarelist" class="form-control dual_select" name="ownitemid[]" multiple >
                                         <?php
-                                            $prosecution = $_POST["prosecution"];
-                                            $query="
+                                        $prosecution = $_POST["prosecution"];
+                                        $query="
 Select ownitem.ownitemname,
   owncategory.owncategoryname,
   ownitem.ownitemid
 From ownitem
   Inner Join owncategory On owncategory.owncategoryid = ownitem.owncategoryid
 Where ownitem.ownitemtype = '1'";
-                                            $results = mysqli_query($con, $query);
+                                        $results = mysqli_query($con, $query);
 
-                                            foreach ($results as $ownitem){
-                                                ?>
-                                                <option value="<?php echo $ownitem["ownitemid"];?>"><?php echo $ownitem["owncategoryname"]." - ".$ownitem["ownitemname"];?>
-                                                </option>
-                                                <?php
-                                            }
+                                        foreach ($results as $ownitem){
+                                            ?>
+                                            <option value="<?php echo $ownitem["ownitemid"];?>"><?php echo $ownitem["owncategoryname"]." - ".$ownitem["ownitemname"];?>
+                                            </option>
+                                            <?php
+                                        }
                                         ?>
                                     </select>
                                     <span class="input-group-btn">
@@ -658,7 +546,7 @@ Where ownitem.ownitemtype = '1'";
             <div class="modal-content animated rollIn">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
-                                class="sr-only">Close</span></button>
+                            class="sr-only">Close</span></button>
                     <h4 class="modal-title">Insert from destination</h4>
                 </div>
                 <div class="modal-body">
@@ -686,19 +574,61 @@ Where ownitem.ownitemtype = '1'";
             </div>
         </div>
     </div>
-    <div class="modal inmodal" id="addowncategory" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal inmodal" id="addadministrator" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg">
-            <div class="modal-content animated rollIn">
+            <div class="modal-content animated flipInY">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
-                                class="sr-only">Close</span></button>
-                    <h4 class="modal-title">Insert a new category</h4>
+                            class="sr-only">Close</span></button>
+                    <h4 class="modal-title">Insert a administrator</h4>
                 </div>
                 <div class="modal-body">
-                    <form method="post" action="php/insertowncategory.php" class="form-horizontal">
+                    <form method="post" action="php/insertadministrator.php" class="form-horizontal">
                         <div class="form-group"><label class="col-sm-2 control-label">Name</label>
                             <div class="col-sm-10">
-                                <input type="text" name="owncategoryname" class="form-control">
+                                <input type="text" name="administratorname" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group"><label class="col-sm-2 control-label">App ID</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="administratorappid" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group"><label class="col-sm-2 control-label">App PW</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="administratorapppw" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Choose an item</label>
+                            <div class="col-sm-10">
+                                <div class="input-group">
+                                    <select id="hardwarelist" class="form-control dual_select" name="prosecutionid[]" multiple >
+                                        <?php
+                                        $query="
+Select prosecution.prosecutionid,
+  prosecution.prosecutionname,
+  administrator_has_prosecution.status
+From prosecution
+  Left Join administrator_has_prosecution
+    On administrator_has_prosecution.prosecutionid = prosecution.prosecutionid
+WHERE ( administrator_has_prosecution.prosecutionid IS NULL or administrator_has_prosecution.status = 0)";
+                                        $results = mysqli_query($con, $query);
+
+                                        foreach ($results as $freepros){
+                                            ?>
+                                            <option value="<?php echo $freepros["prosecutionid"];?>"><?php echo $freepros["prosecutionname"];?>
+                                            </option>
+                                            <?php
+                                        }
+                                        ?>
+                                    </select>
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-primary " type="button" data-toggle="modal" data-target="#additem">
+                                            <i class="fa fa-plus"></i>
+                                        </button>
+                                    </span>
+                                </div>
                             </div>
                         </div>
                 </div>
@@ -719,49 +649,6 @@ Where ownitem.ownitemtype = '1'";
             </div>
         </div>
     </div>
-    <div class="modal inmodal" id="addadministrator" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content animated rollIn">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
-                                class="sr-only">Close</span></button>
-                    <h4 class="modal-title">Insert a administrator</h4>
-                </div>
-                <div class="modal-body">
-                    <form method="post" action="php/insertadministrator.php" class="form-horizontal">
-                        <div class="form-group"><label class="col-sm-2 control-label">Name</label>
-                            <div class="col-sm-10">
-                                <input type="text" name="administratorname" class="form-control">
-                            </div>
-                        </div>
-                        <div class="form-group"><label class="col-sm-2 control-label">App ID</label>
-                            <div class="col-sm-10">
-                                <input type="text" name="administratorappid" class="form-control">
-                            </div>
-                        </div>
-                        <div class="form-group"><label class="col-sm-2 control-label">App PW</label>
-                            <div class="col-sm-10">
-                                <input type="text" name="administratorapppw" class="form-control">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <div class="pull-left">
-                            <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
-                        </div>
-                        <button class="btn" type="reset">
-                            <i class="ace-icon fa fa-undo bigger-110"></i>
-                            Reset
-                        </button>
-                        <button class="btn btn-info" type="Submit" name="submit">
-                            <i class="ace-icon fa fa-check bigger-110"></i>
-                            Submit
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
     <div id="blueimp-gallery" class="blueimp-gallery">
         <div class="slides"></div>
         <h3 class="title"></h3>
@@ -776,7 +663,7 @@ Where ownitem.ownitemtype = '1'";
             <div class="modal-content animated rollIn">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
-                                class="sr-only">Close</span></button>
+                            class="sr-only">Close</span></button>
                     <h4 class="modal-title">Insert prosecution</h4>
                 </div>
                 <div class="modal-body">
@@ -852,11 +739,11 @@ Where ownitem.ownitemtype = '1'";
                 targets: [ 1 ]
             }],
             columnDefs: [{
-                targets: [ 0,3 ],
+                targets: [ 0,2 ],
                 visible: false
             }],
 
-            order: [3, 'desc']
+            order: [2, 'desc']
         });
 
     });
@@ -957,9 +844,9 @@ Where ownitem.ownitemtype = '1'";
         var addButton = $('.add_button'); //Add button selector
         var wrapper = $('.field_wrapper'); //Input field wrapper
         var fieldHTML = '<div>' +
-            '<input style="width: 50px" type="text" class="form-control" name="itemquantity[]"/>' +
-            '<select class="chosen-select2 form-control" name="itemcategory[]">' +
-                '<option></option>' +
+            '<input style="width: 50px" type="text" class="form-control" name="quantity[]"/>' +
+            '<select class="chosen-select2 form-control" name="category[]">' +
+            '<option></option>' +
             <?php
             $query6 = "SELECT * FROM `owncategory`";
             $results6=mysqli_query($con, $query6);

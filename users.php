@@ -96,9 +96,12 @@ include_once "php/connection.php";
                     <li>
                         <a href="hardware.php"><i class="fa fa-microchip"></i> <span class="nav-label">Hardware</span></a>
                     </li>
-                    <?php
-
-                    ?>
+                    <li>
+                        <a href="Receipts.php"><i class="fa fa-cog fa-spin fa-1x"></i> <span class="nav-label">Receipts</span></a>
+                    </li>
+                    <li>
+                        <a href="PICABteam.php"><i class="fa fa-users fa-1x"></i> <span class="nav-label">PICAB team</span></a>
+                    </li>
                 </ul>
             </font>
         </div>
