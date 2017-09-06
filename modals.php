@@ -289,39 +289,6 @@ Where ownitem.ownitemtype = '1'";
         </div>
     </div>
 </div>
-<div class="modal inmodal" id="addpros" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content animated rollIn">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
-                        class="sr-only">Close</span></button>
-                <h4 class="modal-title">Insert prosecution</h4>
-            </div>
-            <div class="modal-body">
-                <form method="post" action="php/insertpros.php" class="form-horizontal">
-                    <div class="form-group"><label class="col-sm-2 control-label">Name</label>
-                        <div class="col-sm-10">
-                            <input name="prosecutionname" type="text" class="form-control">
-                        </div>
-                    </div>
-            </div>
-            <div class="modal-footer">
-                <div class="pull-left">
-                    <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
-                </div>
-                <button class="btn" type="reset">
-                    <i class="ace-icon fa fa-undo bigger-110"></i>
-                    Reset
-                </button>
-                <button class="btn btn-info" type="Submit" name="submit">
-                    <i class="ace-icon fa fa-check bigger-110"></i>
-                    Submit
-                </button>
-            </div>
-            </form>
-        </div>
-    </div>
-</div>
 <div class="modal inmodal" id="addjob" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content animated rollIn">
@@ -584,7 +551,7 @@ Where ownitem.ownitemtype = '1'";
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-2 control-label">Choose an item</label>
+                            <label class="col-sm-2 control-label">Choose prosecution</label>
                             <div class="col-sm-10">
                                 <div class="input-group">
                                     <select id="hardwarelist" class="form-control dual_select" name="prosecutionid[]" multiple >
@@ -608,7 +575,7 @@ WHERE ( administrator_has_prosecution.prosecutionid IS NULL or administrator_has
                                         ?>
                                     </select>
                                     <span class="input-group-btn">
-                                        <button class="btn btn-primary " type="button" data-toggle="modal" data-target="#additem">
+                                        <button class="btn btn-primary " type="button" data-toggle="modal" data-target="#addpros">
                                             <i class="fa fa-plus"></i>
                                         </button>
                                     </span>
@@ -732,6 +699,39 @@ WHERE ( administrator_has_prosecution.prosecutionid IS NULL or administrator_has
 
                             <div class="col-sm-10"><input name="categoryname" type="text" class="form-control"><span
                                         class="help-block m-b-none">Like (Case - Monitor - Scanner - etc)</span></div>
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="pull-left">
+                        <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                    </div>
+                    <button class="btn" type="reset">
+                        <i class="ace-icon fa fa-undo bigger-110"></i>
+                        Reset
+                    </button>
+                    <button class="btn btn-info" type="Submit" name="submit">
+                        <i class="ace-icon fa fa-check bigger-110"></i>
+                        Submit
+                    </button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal inmodal" id="addpros" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content animated rollIn">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
+                                class="sr-only">Close</span></button>
+                    <h4 class="modal-title">Insert prosecution</h4>
+                </div>
+                <div class="modal-body">
+                    <form method="post" action="php/insertpros.php" class="form-horizontal">
+                        <div class="form-group"><label class="col-sm-2 control-label">Name</label>
+                            <div class="col-sm-10">
+                                <input name="prosecutionname" type="text" class="form-control">
+                            </div>
                         </div>
                 </div>
                 <div class="modal-footer">
