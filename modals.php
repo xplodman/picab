@@ -1,118 +1,4 @@
 <font face="myFirstFont">
-    <div class="modal inmodal" id="addexport" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content animated flipInY">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">
-                        <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
-                    </button>
-                    <h4 class="modal-title">Insert export receipt</h4>
-                </div>
-                <div class="modal-body">
-                    Information
-                    <form method="post" action="php/insertreceipt.php" class="form-horizontal"  multipart="" enctype="multipart/form-data">
-                        <input type="hidden" name="type" value="2">
-                        <div class="form-group"><label class="col-sm-2 control-label">To</label>
-                            <div class="col-sm-10">
-                                <div class="input-group">
-                                    <select required="required" class="chosen-select form-control" name="toid">
-                                        <option></option>
-                                        <?php
-                                        $query = "SELECT * FROM prosecution";
-                                        $results=mysqli_query($con, $query);
-                                        //loop
-                                        foreach ($results as $prosecution){
-                                            ?>
-                                            <option value="<?php echo $prosecution["prosecutionid"];?>"><?php echo $prosecution["prosecutionname"];?></option>
-                                            <?php
-                                        }
-                                        ?>
-                                    </select>
-                                    <span class="input-group-btn">
-                                        <button class="btn btn-primary " type="button" data-toggle="modal" data-target="#addpros"><i class="fa fa-plus"></i>
-                                        </button>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group"><label class="col-sm-2 control-label">Sign</label>
-                            <div class="col-sm-10">
-                                <input name="receiptsign" type="text" class="form-control">
-                            </div>
-                        </div>
-                        <div class="form-group" id="data_1">
-                            <label class="col-sm-2 control-label">Date</label>
-                            <div class="col-sm-10">
-                                <div class="input-group date">
-                                    <input type="text" class="form-control" name="date">
-                                    <span class="input-group-addon">
-                                        <i class="fa fa-calendar"></i>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="hr-line-dashed"></div>
-                        Images
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">Image</label>
-                            <div class="col-sm-10">
-                                <div class="input-group">
-                                    <input type="file" name="userfile[]" multiple/>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="hr-line-dashed"></div>
-                        Items
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">Choose an item</label>
-                            <div class="col-sm-10">
-                                <div class="input-group">
-                                    <select id="hardwarelist" class="form-control dual_select" name="ownitemid[]" multiple >
-                                        <?php
-                                        $prosecution = $_POST["prosecution"];
-                                        $query="
-Select ownitem.ownitemname,
-  owncategory.owncategoryname,
-  ownitem.ownitemid
-From ownitem
-  Inner Join owncategory On owncategory.owncategoryid = ownitem.owncategoryid
-Where ownitem.ownitemtype = '1'";
-                                        $results = mysqli_query($con, $query);
-
-                                        foreach ($results as $ownitem){
-                                            ?>
-                                            <option value="<?php echo $ownitem["ownitemid"];?>"><?php echo $ownitem["owncategoryname"]." - ".$ownitem["ownitemname"];?>
-                                            </option>
-                                            <?php
-                                        }
-                                        ?>
-                                    </select>
-                                    <span class="input-group-btn">
-                                        <button class="btn btn-primary " type="button" data-toggle="modal" data-target="#additem">
-                                            <i class="fa fa-plus"></i>
-                                        </button>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                </div>
-                <div class="modal-footer">
-                    <div class="pull-left">
-                        <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
-                    </div>
-                    <button class="btn" type="reset">
-                        <i class="ace-icon fa fa-undo bigger-110"></i>
-                        Reset
-                    </button>
-                    <button class="btn btn-info"  type="Submit"  name="submit">
-                        <i class="ace-icon fa fa-check bigger-110"></i>
-                        Submit
-                    </button>
-                </div>
-                </form>
-            </div>
-        </div>
-    </div>
     <div class="modal inmodal" id="adduser" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content animated flipInY">
@@ -203,125 +89,234 @@ Where ownitem.ownitemtype = '1'";
             </div>
         </div>
     </div>
-    <div class="modal inmodal" id="additem" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content animated flipInY">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
-                        class="sr-only">Close</span></button>
-                <h4 class="modal-title">Insert hardware item</h4>
+    <div class="modal inmodal" id="addexport" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content animated flipInY">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                    </button>
+                    <h4 class="modal-title">Insert export receipt</h4>
+                </div>
+                <div class="modal-body">
+                    Information
+                    <form method="post" action="php/insertreceipt.php" class="form-horizontal"  multipart="" enctype="multipart/form-data">
+                        <input type="hidden" name="type" value="2">
+                        <div class="form-group"><label class="col-sm-2 control-label">To</label>
+                            <div class="col-sm-10">
+                                <div class="input-group">
+                                    <select required="required" class="chosen-select form-control" name="toid">
+                                        <option></option>
+                                        <?php
+                                        $query = "SELECT * FROM prosecution";
+                                        $results=mysqli_query($con, $query);
+                                        //loop
+                                        foreach ($results as $prosecution){
+                                            ?>
+                                            <option value="<?php echo $prosecution["prosecutionid"];?>"><?php echo $prosecution["prosecutionname"];?></option>
+                                            <?php
+                                        }
+                                        ?>
+                                    </select>
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-primary " type="button" data-toggle="modal" data-target="#addpros"><i class="fa fa-plus"></i>
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group"><label class="col-sm-2 control-label">Sign</label>
+                            <div class="col-sm-10">
+                                <input name="receiptsign" type="text" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group" id="data_1">
+                            <label class="col-sm-2 control-label">Date</label>
+                            <div class="col-sm-10">
+                                <div class="input-group date">
+                                    <input type="text" class="form-control" name="date">
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        Images
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Image</label>
+                            <div class="col-sm-10">
+                                <div class="input-group">
+                                    <input type="file" name="userfile[]" multiple/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        Items
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Choose an item</label>
+                            <div class="col-sm-10">
+                                <div class="input-group">
+                                    <select id="hardwarelist" class="form-control dual_select" name="ownitemid[]" multiple >
+                                        <?php
+                                        $prosecution = $_POST["prosecution"];
+                                        $query="
+Select ownitem.ownitemname,
+  owncategory.owncategoryname,
+  ownitem.ownitemid
+From ownitem
+  Inner Join owncategory On owncategory.owncategoryid = ownitem.owncategoryid
+Where ownitem.ownitemtype = '1'";
+                                        $results = mysqli_query($con, $query);
+                                        foreach ($results as $ownitem){
+                                            ?>
+                                            <option value="<?php echo $ownitem["ownitemid"];?>"><?php echo $ownitem["owncategoryname"]." - ".$ownitem["ownitemname"];?>
+                                            </option>
+                                            <?php
+                                        }
+                                        ?>
+                                    </select>
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-primary " type="button" data-toggle="modal" data-target="#additem">
+                                            <i class="fa fa-plus"></i>
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="pull-left">
+                        <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                    </div>
+                    <button class="btn" type="reset">
+                        <i class="ace-icon fa fa-undo bigger-110"></i>
+                        Reset
+                    </button>
+                    <button class="btn btn-info"  type="Submit"  name="submit">
+                        <i class="ace-icon fa fa-check bigger-110"></i>
+                        Submit
+                    </button>
+                </div>
+                </form>
             </div>
-            <div class="modal-body">
-                <form method="post" action="php/insertitem.php" class="form-horizontal">
-                    <div class="form-group"><label class="col-sm-2 control-label">Category</label>
-                        <div class="col-sm-10">
-                            <div class="input-group"><select required="required" name="categoryname" class="chosen-select" form-control">
-                                <option></option>
-                                <?php
-                                $result = mysqli_query($con, "SELECT * FROM `category`");
-                                while ($row = $result->fetch_assoc()) {
-                                    ?>
-                                    <option value="<?php echo $row['categoryid'] ?>"> <?php echo $row['categoryname']?> </option>
-                                <?php } ?>
-                                </select> <span class="input-group-btn"> <button
-                                        class="btn btn-primary " type="button"
-                                        data-toggle="modal" data-target="#addcat"><i
-                                            class="fa fa-plus"></i></button>
-                                                    </span></div>
-                        </div>
-                    </div>
-                    <div class="form-group"><label class="col-sm-2 control-label">Name</label>
+        </div>
+    </div>
 
-                        <div class="col-sm-10"><input required="required" name="hardwarename" type="text" class="form-control"><span
-                                class="help-block m-b-none">Like (HP - Dell - Canon - etc)</span>
-                        </div>
-                    </div>
-                    <div class="form-group"><label class="col-sm-2 control-label">serial</label>
-
-                        <div class="col-sm-10"><input name="hardwaresn" type="text" class="form-control"></div>
-                    </div>
-                    <div class="form-group"><label class="col-sm-2 control-label">IP</label>
-
-                        <div class="col-sm-10"><input name="hardwareip" type="text" class="form-control"></div>
-                    </div>
-                    <div class="form-group"><label class="col-sm-2 control-label">Store in</label>
-                        <div class="col-sm-10">
-                            <div class="input-group"><select required="required" class="chosen-select form-control" name="prosecution">
+    <div class="modal inmodal" id="additem" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content animated flipInY">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
+                                class="sr-only">Close</span></button>
+                    <h4 class="modal-title">Insert hardware item</h4>
+                </div>
+                <div class="modal-body">
+                    <form method="post" action="php/insertitem.php" class="form-horizontal">
+                        <div class="form-group"><label class="col-sm-2 control-label">Category</label>
+                            <div class="col-sm-10">
+                                <div class="input-group"><select required="required" name="categoryname" class="chosen-select" form-control">
                                     <option></option>
                                     <?php
-                                    $query = "SELECT * FROM prosecution";
-                                    $results=mysqli_query($con, $query);
-                                    //loop
-                                    foreach ($results as $prosecution){
+                                    $result = mysqli_query($con, "SELECT * FROM `category`");
+                                    while ($row = $result->fetch_assoc()) {
                                         ?>
-                                        <option value="<?php echo $prosecution["prosecutionid"];?>"><?php echo $prosecution["prosecutionname"];?></option>
-                                        <?php
-                                    }
-                                    ?>
-                                </select> <span class="input-group-btn"> <button
-                                        class="btn btn-primary " type="button"
-                                        data-toggle="modal" data-target="#addpros"><i
-                                            class="fa fa-plus"></i></button>
+                                        <option value="<?php echo $row['categoryid'] ?>"> <?php echo $row['categoryname']?> </option>
+                                    <?php } ?>
+                                    </select> <span class="input-group-btn"> <button
+                                                class="btn btn-primary " type="button"
+                                                data-toggle="modal" data-target="#addcat"><i
+                                                    class="fa fa-plus"></i></button>
                                                     </span></div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-4 col-sm-offset-2">
-
+                        <div class="form-group"><label class="col-sm-2 control-label">Name</label>
+                            <div class="col-sm-10"><input required="required" name="hardwarename" type="text" class="form-control"><span
+                                        class="help-block m-b-none">Like (HP - Dell - Canon - etc)</span>
+                            </div>
                         </div>
-                    </div>
-
-            </div>
-            <div class="modal-footer">
-                <div class="pull-left">
-                    <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                        <div class="form-group"><label class="col-sm-2 control-label">serial</label>
+                            <div class="col-sm-10"><input name="hardwaresn" type="text" class="form-control"></div>
+                        </div>
+                        <div class="form-group"><label class="col-sm-2 control-label">IP</label>
+                            <div class="col-sm-10"><input name="hardwareip" type="text" class="form-control"></div>
+                        </div>
+                        <div class="form-group"><label class="col-sm-2 control-label">Store in</label>
+                            <div class="col-sm-10">
+                                <div class="input-group"><select required="required" class="chosen-select form-control" name="prosecution">
+                                        <option></option>
+                                        <?php
+                                        $query = "SELECT * FROM prosecution";
+                                        $results=mysqli_query($con, $query);
+                                        //loop
+                                        foreach ($results as $prosecution){
+                                            ?>
+                                            <option value="<?php echo $prosecution["prosecutionid"];?>"><?php echo $prosecution["prosecutionname"];?></option>
+                                            <?php
+                                        }
+                                        ?>
+                                    </select> <span class="input-group-btn"> <button
+                                                class="btn btn-primary " type="button"
+                                                data-toggle="modal" data-target="#addpros"><i
+                                                    class="fa fa-plus"></i></button>
+                                                    </span></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-2">
+                            </div>
+                        </div>
                 </div>
-                <button class="btn" type="reset">
-                    <i class="ace-icon fa fa-undo bigger-110"></i>
-                    Reset
-                </button>
-                <button class="btn btn-info" type="Submit" name="submit">
-                    <i class="ace-icon fa fa-check bigger-110"></i>
-                    Submit
-                </button>
+                <div class="modal-footer">
+                    <div class="pull-left">
+                        <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                    </div>
+                    <button class="btn" type="reset">
+                        <i class="ace-icon fa fa-undo bigger-110"></i>
+                        Reset
+                    </button>
+                    <button class="btn btn-info" type="Submit" name="submit">
+                        <i class="ace-icon fa fa-check bigger-110"></i>
+                        Submit
+                    </button>
+                </div>
+                </form>
             </div>
-            </form>
         </div>
     </div>
-</div>
-<div class="modal inmodal" id="addjob" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content animated rollIn">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
-                        class="sr-only">Close</span></button>
-                <h4 class="modal-title">Insert a job</h4>
-            </div>
-            <div class="modal-body">
-                <form method="post" action="php/insertjob.php" class="form-horizontal">
-                    <div class="form-group"><label class="col-sm-2 control-label">Name</label>
-                        <div class="col-sm-10">
-                            <input type="text" name="jobname" class="form-control">
-                        </div>
-                    </div>
-            </div>
-            <div class="modal-footer">
-                <div class="pull-left">
-                    <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+    <div class="modal inmodal" id="addjob" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content animated rollIn">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
+                                class="sr-only">Close</span></button>
+                    <h4 class="modal-title">Insert a job</h4>
                 </div>
-                <button class="btn" type="reset">
-                    <i class="ace-icon fa fa-undo bigger-110"></i>
-                    Reset
-                </button>
-                <button class="btn btn-info" type="Submit" name="submit">
-                    <i class="ace-icon fa fa-check bigger-110"></i>
-                    Submit
-                </button>
+                <div class="modal-body">
+                    <form method="post" action="php/insertjob.php" class="form-horizontal">
+                        <div class="form-group"><label class="col-sm-2 control-label">Name</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="jobname" class="form-control">
+                            </div>
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="pull-left">
+                        <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                    </div>
+                    <button class="btn" type="reset">
+                        <i class="ace-icon fa fa-undo bigger-110"></i>
+                        Reset
+                    </button>
+                    <button class="btn btn-info" type="Submit" name="submit">
+                        <i class="ace-icon fa fa-check bigger-110"></i>
+                        Submit
+                    </button>
+                </div>
+                </form>
             </div>
-            </form>
         </div>
     </div>
-</div>
     <div class="modal inmodal" id="addimport" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content animated flipInY">
@@ -411,7 +406,6 @@ Where ownitem.ownitemtype = '1'";
                                 <i class="fa fa-plus">Add a new category</i>
                             </button>
                         </div>
-
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Item</label>
                             <div class="col-sm-10">
@@ -565,7 +559,6 @@ From prosecution
     On administrator_has_prosecution.prosecutionid = prosecution.prosecutionid
 WHERE ( administrator_has_prosecution.prosecutionid IS NULL or administrator_has_prosecution.status = 0)";
                                         $results = mysqli_query($con, $query);
-
                                         foreach ($results as $freepros){
                                             ?>
                                             <option value="<?php echo $freepros["prosecutionid"];?>"><?php echo $freepros["prosecutionname"];?>

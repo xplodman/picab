@@ -5,10 +5,9 @@ include_once "php/connection.php";
 <html>
 
 <?php
-$pageTitle = 'Users';
+$pageTitle = 'Hardware';
 include_once "header.php";
 ?>
-
 <body class="animated fadeIn">
 <div id="wrapper">
     <?php
@@ -59,7 +58,7 @@ include_once "header.php";
                                         </thead>
                                         <tbody>
                                         <?php
-                                            $result = mysqli_query($con,"
+                                        $result = mysqli_query($con,"
                                                 Select user.username,
                                                   job.jobname,
                                                   user.userid,
@@ -71,8 +70,8 @@ include_once "header.php";
                                                   Inner Join user On user.jobid = job.jobid
                                                   Inner Join prosecution On prosecution.prosecutionid = user.prosecutionid
                                                 Order By user.username") or die(mysqli_error($con));
-                                            while($row = mysqli_fetch_assoc($result)) {
-$result2 = mysqli_query($con,"
+                                        while($row = mysqli_fetch_assoc($result)) {
+                                            $result2 = mysqli_query($con,"
 Select category.categoryname,
   hardware.hardwarename,
   hardware.hardwaresn
@@ -81,19 +80,19 @@ From hardware
     hardware.hardwareid
   Inner Join category On hardware.categoryid = category.categoryid
 Where user_has_hardware.userid = $row[userid] ") or die(mysqli_error($con)); ?>
-                                                <tr data-child-value="
+                                            <tr data-child-value="
                                                 <?php
-                                                while($row2 = mysqli_fetch_assoc($result2)) {
-                                                    echo $row2['categoryname']." - ".$row2['hardwarename']."- SN: ".$row2['hardwaresn'];
-                                                    if (mysqli_num_rows($result) > 1) {
-                                                        echo "<br>";
-                                                    }
+                                            while($row2 = mysqli_fetch_assoc($result2)) {
+                                                echo $row2['categoryname']." - ".$row2['hardwarename']."- SN: ".$row2['hardwaresn'];
+                                                if (mysqli_num_rows($result) > 1) {
+                                                    echo "<br>";
                                                 }
-                                                ?>
+                                            }
+                                            ?>
 ">
-                                                    <td>
-                                                        <?php
-                                                        $result2 = mysqli_query($con,"
+                                                <td>
+                                                    <?php
+                                                    $result2 = mysqli_query($con,"
 Select category.categoryname,
   hardware.hardwarename,
   hardware.hardwaresn
@@ -102,22 +101,22 @@ From hardware
     hardware.hardwareid
   Inner Join category On hardware.categoryid = category.categoryid
 Where user_has_hardware.userid =  $row[userid] AND user_has_hardware.status = '1'") or die(mysqli_error($con));
-                                                        while($row2 = mysqli_fetch_assoc($result2)) {
-                                                            echo $row2['categoryname']." - ".$row2['hardwarename']."- SN: ".$row2['hardwaresn'];
-                                                        }
-                                                        ?>
-                                                    </td>
-                                                    <td class="details-control"></td>
-                                                    <td class="middle wrap"><?php echo $row['username'] ?></td>
-                                                    <td class="middle wrap"><?php echo $row['jobname'] ?></td>
-                                                    <td class="middle wrap"><font
-                                                                size="3"><?php echo $row['userappid'] ?></font></td>
-                                                    <td class="middle wrap"><font
-                                                                size="3"><?php echo $row['userapppw'] ?></font></td>
-                                                    <td class="middle wrap"><?php echo $row['prosecutionname'] ?></td>
-                                                </tr>
-                                                <?php
-                                            }
+                                                    while($row2 = mysqli_fetch_assoc($result2)) {
+                                                        echo $row2['categoryname']." - ".$row2['hardwarename']."- SN: ".$row2['hardwaresn'];
+                                                    }
+                                                    ?>
+                                                </td>
+                                                <td class="details-control"></td>
+                                                <td class="middle wrap"><?php echo $row['username'] ?></td>
+                                                <td class="middle wrap"><?php echo $row['jobname'] ?></td>
+                                                <td class="middle wrap"><font
+                                                            size="3"><?php echo $row['userappid'] ?></font></td>
+                                                <td class="middle wrap"><font
+                                                            size="3"><?php echo $row['userapppw'] ?></font></td>
+                                                <td class="middle wrap"><?php echo $row['prosecutionname'] ?></td>
+                                            </tr>
+                                            <?php
+                                        }
                                         ?>
                                         </tbody>
                                         <tfoot>
@@ -146,32 +145,25 @@ Where user_has_hardware.userid =  $row[userid] AND user_has_hardware.status = '1
         </div>
     </div>
 </div>
-    <?php
-    include_once "modals.php";
-    ?>
+<?php
+include_once "modals.php";
+?>
 <!-- Mainly scripts -->
 <script src="js/jquery-3.1.1.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
 <script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-
 <!-- Custom and plugin javascript -->
 <script src="js/inspinia.js"></script>
 <script src="js/plugins/pace/pace.min.js"></script>
-
 <!-- Select2 -->
 <script src="js/plugins/select2/select2.full.min.js"></script>
-
 <!-- Chosen -->
 <script src="js/plugins/chosen/chosen.jquery.js"></script>
-
 <!-- Dual Listbox -->
 <script src="js/plugins/dualListbox/jquery.bootstrap-duallistbox.js"></script>
-
 <!-- Toastr -->
 <script src="js/plugins/toastr/toastr.min.js"></script>
-
-
 <script src="js/plugins/dataTables/datatables.min.js"></script>
 <script>
     function format(value) {
@@ -196,9 +188,7 @@ Where user_has_hardware.userid =  $row[userid] AND user_has_hardware.status = '1
                 visible: false
             }],
             order: [2, 'asc']
-
         });
-
     });
 </script>
 <script>
@@ -222,12 +212,9 @@ Where user_has_hardware.userid =  $row[userid] AND user_has_hardware.status = '1
                 echo "error('برجاء إعادة المحاولة', 'لم تتم العملية بنجاح')";
             }
             };?>;
-
         }, 1300);
-
     });
 </script>
-
 <script>
     $(document).ready(function() {
         var table = $('.dataTables-example').DataTable();
@@ -278,7 +265,6 @@ Where user_has_hardware.userid =  $row[userid] AND user_has_hardware.status = '1
             });
         });
     });
-
 </script>
 <script>
     function getId(val){
