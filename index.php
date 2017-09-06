@@ -4,169 +4,19 @@ include_once "php/connection.php";
 <!DOCTYPE html>
 <html>
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PICAB ref | Dashboard</title>
-    <style>
-        @font-face {
-            font-family: myFirstFont;
-            src: url(fonts/arabicfont.otf);
-        }
-        p,
-        th,
-        td,
-        tr,
-        span.arabic {
-            font-family: myFirstFont;
-        }
-        .c3 text {
-            font-size:16px;
-            font-family: myFirstFont;
-        }
-    </style>
-
-    <style type='text/css'>
-        table {
-            table-layout: fixed;
-            /* nothing here - table is block, so should auto expand to as large as it can get without causing scrollbars? */
-        }
-
-        .left {
-            text-align: center;
-        }
-
-        .right {
-            text-align: right;
-        }
-
-        .middle {
-            text-align: left;
-            /* expand this column to as large as it can get within table? */
-        }
-
-        .wrap {
-            word-wrap: break-word;
-            /* use up entire cell this div is contained in? */
-        }
-    </style>
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
-    <link href="css/plugins/c3/c3.min.css" rel="stylesheet">
-    <link href="css/plugins/dataTables/datatables.min.css" rel="stylesheet">
-    <link href="css/animate.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
-    <link href="css/plugins/select2/select2.min.css" rel="stylesheet">
-    <link href="css/plugins/chosen/bootstrap-chosen.css" rel="stylesheet">
-    <link href="css/plugins/dualListbox/bootstrap-duallistbox.min.css" rel="stylesheet">
-
-    <!-- Toastr style -->
-    <link href="css/plugins/toastr/toastr.min.css" rel="stylesheet">
-
-
-</head>
-
+<?php
+$pageTitle = 'Dashboard';
+include_once "header.php";
+?>
 <body class="animated fadeIn">
 <div id="wrapper">
-    <nav class="navbar-default navbar-static-side" role="navigation">
-        <div class="sidebar-collapse">
-            <font face="myFirstFont">
-                <ul class="nav metismenu" id="side-menu">
-                    <li class="nav-header">
-                        <div class="dropdown profile-element"> <span>
-                            <img alt="image" class="img-circle" src="img/profile_small.jpg" />
-                             </span>
-                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                            <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">Ahmed</strong>
-                             </span> <span class="text-muted text-xs block">System admin<b class="caret"></b></span> </span> </a>
-                            <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                                <li><a href="mailbox.html">Mailbox</a></li>
-                                <li class="divider"></li>
-                                <li><a href="login.html">Logout</a></li>
-                            </ul>
-                        </div>
-                        <div class="logo-element">
-                            <font color="red">PIC</font>AB<br><small>ref</small>
-                        </div>
-                    </li>
-                    <li class="active">
-                        <a href="index.php">
-                            <i class="fa fa-area-chart"></i> <span class="nav-label">Dashboard</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="users.php"><i class="fa fa-user-circle"></i> <span class="nav-label">Users</span></a>
-                    </li>
-                    <li>
-                        <a href="hardware.php"><i class="fa fa-microchip"></i> <span class="nav-label">Hardware</span></a>
-                    </li>
-                    <li>
-                        <a href="Receipts.php"><i class="fa fa-cog fa-spin fa-1x"></i> <span class="nav-label">Receipts</span></a>
-                    </li>
-                    <li>
-                        <a href="PICABteam.php"><i class="fa fa-users fa-1x"></i> <span class="nav-label">PICAB team</span></a>
-                    </li>
-                </ul>
-            </font>
-        </div>
-    </nav>
+    <?php
+    include_once "menu.php";
+    ?>
     <div id="page-wrapper" class="gray-bg">
-        <div class="row border-bottom">
-            <nav class="navbar navbar-static-top  " role="navigation" style="margin-bottom: 0">
-                <div class="navbar-header">
-                    <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
-                </div>
-                <ul class="nav navbar-top-links navbar-right">
-                    <li class="dropdown">
-                        <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-                            <i class="fa fa-bell"></i> <span class="label label-danger">8</span>
-                        </a>
-                        <ul class="dropdown-menu dropdown-alerts">
-                            <li>
-                                <a href="mailbox.html">
-                                    <div>
-                                        <i class="fa fa-envelope fa-fw"></i> You have 16 messages
-                                        <span class="pull-right text-muted small">4 minutes ago</span>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a href="profile.html">
-                                    <div>
-                                        <i class="fa fa-twitter fa-fw"></i> 3 New Followers
-                                        <span class="pull-right text-muted small">12 minutes ago</span>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a href="grid_options.html">
-                                    <div>
-                                        <i class="fa fa-upload fa-fw"></i> Server Rebooted
-                                        <span class="pull-right text-muted small">4 minutes ago</span>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <div class="text-center link-block">
-                                    <a href="notifications.html">
-                                        <strong>See All Alerts</strong>
-                                        <i class="fa fa-angle-right"></i>
-                                    </a>
-                                </div>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="logout.php">
-                            <i class="fa fa-sign-out"></i> Log out
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-        </div>
+        <?php
+        include_once "topbar.php";
+        ?>
         <div class="row wrapper border-bottom white-bg page-heading animated fadeInLeftBig">
             <div class="col-sm-4">
                 <h2><p>Dashboard</p></h2>
@@ -341,6 +191,7 @@ include_once "php/connection.php";
             </div>
         </div>
     </div>
+
     <div class="modal inmodal" id="addjob" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content animated rollIn">
@@ -375,6 +226,8 @@ include_once "php/connection.php";
         </div>
     </div>
 </font>
+
+
 <!-- Mainly scripts -->
 <script src="js/jquery-3.1.1.min.js"></script>
 <script src="js/bootstrap.min.js"></script>

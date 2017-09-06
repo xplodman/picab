@@ -14,7 +14,7 @@ if ($type=="1"){
 
     $query = mysqli_query($con, "INSERT INTO `receipt`(`receiptid`, `fromid`, `toid`, `receiptsign`, `receiptdate`, `receipttype`, `createddate`, `updatedate`) VALUES ('$maxreceiptid','$fromid',NULL,'$receiptsign','$date','$type',NOW(),NULL);")or die(mysqli_error($con));
 	
-if (file_exists($file_tmp)) {
+
 // inserting image
     foreach($_FILES['userfile']['tmp_name'] as $key => $tmp_name ){
         $file_name = $key.$_FILES['userfile']['name'][$key];
@@ -22,7 +22,7 @@ if (file_exists($file_tmp)) {
         $file_tmp =$_FILES['userfile']['tmp_name'][$key];
         $file_type=$_FILES['userfile']['type'][$key];
 
-
+        if (file_exists($file_tmp)) {
         // database connection
 
         $maximageid = mysqli_query($con, "Select Max(`image`.`imageid`) From `image`");
@@ -40,7 +40,7 @@ if (file_exists($file_tmp)) {
 	VALUES
 	($maximageid,'{$imgData}',$maxreceiptid, NOW(),NULL);") or die(mysqli_error($con));
     }
-}else{
+
 	
 };
 
@@ -104,7 +104,7 @@ if (file_exists($file_tmp)) {
 
     $query = mysqli_query($con, "INSERT INTO `receipt`(`receiptid`, `fromid`, `toid`, `receiptsign`, `receiptdate`, `receipttype`, `createddate`, `updatedate`) VALUES ('$maxreceiptid',NULL,'$toid','$receiptsign','$date','$type',NOW(),NULL);")or die(mysqli_error($con));
 
-if (file_exists($file_tmp)) {	
+
     // inserting image
     foreach($_FILES['userfile']['tmp_name'] as $key => $tmp_name ){
         $file_name = $key.$_FILES['userfile']['name'][$key];
@@ -112,8 +112,8 @@ if (file_exists($file_tmp)) {
         $file_tmp =$_FILES['userfile']['tmp_name'][$key];
         $file_type=$_FILES['userfile']['type'][$key];
 
-
-        $maximageid = mysqli_query($con, "Select Max(`image`.`imageid`) From `image`");
+        if (file_exists($file_tmp)) {
+            $maximageid = mysqli_query($con, "Select Max(`image`.`imageid`) From `image`");
         $maximageid = mysqli_fetch_row($maximageid);
         $maximageid = implode("", $maximageid);
         $maximageid=$maximageid+1;
@@ -128,7 +128,7 @@ if (file_exists($file_tmp)) {
 	VALUES
 	($maximageid,'{$imgData}',$maxreceiptid, NOW(),NULL);") or die(mysqli_error($con));
     }
-}else{};
+};
 
     // update items
     $ownitemidlen = count($ownitemid);

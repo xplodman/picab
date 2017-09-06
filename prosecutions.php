@@ -5,7 +5,7 @@ include_once "php/connection.php";
 <html>
 
 <?php
-$pageTitle = 'PICAB Team';
+$pageTitle = 'Prosecutions';
 include_once "header.php";
 ?>
 
@@ -86,13 +86,13 @@ include_once "header.php";
                                                 </td>
                                                 <td class="middle wrap">
                                                     <?php
-                                                        if ($row22['administratorrole'] == 1){
-                                                            echo "Administrator";
-                                                        }elseif($row22['administratorrole'] == 2){
-                                                            echo "Power user";
-                                                        }else{
-                                                            echo "User";
-                                                        }
+                                                    if ($row22['administratorrole'] == 1){
+                                                        echo "Administrator";
+                                                    }elseif($row22['administratorrole'] == 2){
+                                                        echo "Power user";
+                                                    }else{
+                                                        echo "User";
+                                                    }
                                                     ?>
                                                 </td>
                                                 <td class="middle wrap">
@@ -110,7 +110,7 @@ Where administrator.administratorid = $row22[administratorid]");
                                                         $prosecutionname = $pros['prosecutionname'];
                                                         ?>
                                                         <a class="btn btn-success btn-rounded  btn-xs" href="#"><?php echo $prosecutionname; ?></a>
-<?php
+                                                        <?php
                                                     };
                                                     ?>
                                                 </td>
