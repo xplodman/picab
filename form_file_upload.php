@@ -574,10 +574,6 @@
     <!-- DROPZONE -->
     <script src="js/plugins/dropzone/dropzone.js"></script>
 
-    <!-- CodeMirror -->
-    <script src="js/plugins/codemirror/codemirror.js"></script>
-    <script src="js/plugins/codemirror/mode/xml/xml.js"></script>
-
 
     <script>
         Dropzone.options.dropzoneForm = {

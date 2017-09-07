@@ -116,9 +116,12 @@ include_once "layout/header.php";
                                                 <td>
                                                     <?php echo $row22['prosecutionid'] ?>
                                                 </td><!--order column-->
-                                                <td class="middle wrap"><font size="3">
-                                                    <?php echo $row22['prosecutionname'] ?>
-                                                    </font></td>
+                                                <td class="middle wrap">
+                                                    <font size="3">
+                                                        <a class="green" href="prosecution.php?prosecutionid=<?php echo $row22['prosecutionid'] ?>"><?php echo $row22['prosecutionname'] ?>
+                                                        </a>
+                                                    </font>
+                                                </td>
                                                 <?php
                                                 for($z=1 ; $z <= $categorycount ; $z++)
                                                 { ?>

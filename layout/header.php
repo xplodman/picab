@@ -58,6 +58,8 @@
     <link href="css/plugins/daterangepicker/daterangepicker-bs3.css" rel="stylesheet">
     <link href="css/plugins/datapicker/datepicker3.css" rel="stylesheet">
     <link href="css/plugins/blueimp/css/blueimp-gallery.min.css" rel="stylesheet">
+    <link href="css/plugins/dropzone/basic.css" rel="stylesheet">
+    <link href="css/plugins/dropzone/dropzone.css" rel="stylesheet">
 
     <!-- Toastr style -->
     <link href="css/plugins/toastr/toastr.min.css" rel="stylesheet">
