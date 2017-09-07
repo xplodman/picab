@@ -6,26 +6,26 @@ include_once "php/connection.php";
 
 <?php
 $pageTitle = 'Prosecutions';
-include_once "header.php";
+include_once "layout/header.php";
 ?>
 
 <body class="animated fadeIn">
 <div id="wrapper">
     <?php
-    include_once "menu.php";
+    include_once "layout/menu.php";
     ?>
     <div id="page-wrapper" class="gray-bg">
         <?php
-        include_once "topbar.php";
+        include_once "layout/topbar.php";
         ?>
         <div class="row wrapper border-bottom white-bg page-heading animated fadeInLeftBig">
             <div class="col-sm-4">
-                <h2><p>PICAB team</p></h2>
+                <h2><p>Prosecutions</p></h2>
             </div>
             <div class="col-sm-8">
                 <font face="myFirstFont">
                     <div class="title-action">
-                        <button class="btn btn-primary " type="button" data-toggle="modal" data-target="#addadministrator"><i class="fa fa-plus"></i> Add</button>
+                        <button class="btn btn-primary " type="button" data-toggle="modal" data-target="#addpros"><i class="fa fa-plus"></i> Add</button>
                     </div>
                 </font>
             </div>
@@ -35,7 +35,7 @@ include_once "header.php";
                 <div class="col-lg-12">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <h5>Search and view receipts informations</h5>
+                            <h5>Search and view prosecutions</h5>
                             <div class="ibox-tools">
                                 <a class="collapse-link">
                                     <i class="fa fa-chevron-up"></i>
@@ -51,69 +51,99 @@ include_once "header.php";
                                             <th>extn</th>
                                             <th style="width:1em"></th>
                                             <th style="width:1em"></th><!--order column-->
-                                            <th>Name</th>
-                                            <th>App ID</th>
-                                            <th>App PW</th>
-                                            <th>Role</th>
-                                            <th>pros</th>
+                                            <th>Prosecution name</th>
+                                            <?php
+                                            $category=mysqli_query($con, "
+                                            Select category.categoryname
+                                            From category
+                                              Inner Join hardware On hardware.categoryid = category.categoryid
+                                              Inner Join prosecution On prosecution.prosecutionid = hardware.prosecutionid
+                                            Group By category.categoryname ")or die(mysqli_error($con));
+                                            $categorycount = mysqli_num_rows($category);
+                                            while($categoryname = mysqli_fetch_assoc($category)) {
+                                                ?>
+                                                <th><?php echo $categoryname['categoryname']?></th>
+                                                <?php
+                                            }
+                                            ?>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         <?php
                                         $result22 = mysqli_query($con,"
-                                                Select administrator.administratorid,
-                                                  administrator.administratorname,
-                                                  administrator.administratorappid,
-                                                  administrator.administratorapppw,
-                                                  administrator.administratorrole
-                                                From administrator") or die(mysqli_error($con));
+                                                Select prosecution.prosecutionid,
+                                                  prosecution.prosecutionname
+                                                From prosecution  ") or die(mysqli_error($con));
                                         while($row22 = mysqli_fetch_assoc($result22)) {
                                             ?>
-                                            <tr data-child-value=""> <!--info plus-->
+                                            <tr data-child-value="
+                                                <?php
+                                            $jobsgroup = mysqli_query($con,"
+                                                Select job.jobname,
+                                                  Count(job.jobid) As jobscount
+                                                From job
+                                                  Inner Join user On user.jobid = job.jobid
+                                                  Inner Join prosecution On user.prosecutionid = prosecution.prosecutionid
+                                                Where prosecution.prosecutionid = $row22[prosecutionid]
+                                                Group By job.jobname,
+                                                  prosecution.prosecutionid") or die(mysqli_error($con));
+                                            while($jobsgroupinfo = mysqli_fetch_assoc($jobsgroup)) {
+                                                echo $jobsgroupinfo['jobscount']." - ".$jobsgroupinfo['jobname'];
+                                                if (mysqli_num_rows($jobsgroup) > 1) {
+                                                    echo "<br>";
+                                                }
+                                            }?>
+"> <!--info plus-->
                                                 <td><!--search in info plus-->
-
+                                                    <?php
+                                                    $jobsgroup = mysqli_query($con,"
+                                                Select job.jobname,
+                                                  Count(job.jobid) As jobscount
+                                                From job
+                                                  Inner Join user On user.jobid = job.jobid
+                                                  Inner Join prosecution On user.prosecutionid = prosecution.prosecutionid
+                                                Where prosecution.prosecutionid = $row22[prosecutionid]
+                                                Group By job.jobname,
+                                                  prosecution.prosecutionid") or die(mysqli_error($con));
+                                                    while($jobsgroupinfo = mysqli_fetch_assoc($jobsgroup)) {
+                                                        echo $jobsgroupinfo['jobscount']." - ".$jobsgroupinfo['jobname'];
+                                                        if (mysqli_num_rows($jobsgroup) > 1) {
+                                                            echo "<br>";
+                                                        }
+                                                    }?>
                                                 </td>
                                                 <td class="details-control"></td>
-                                                <td><?php echo $row22['administratorid'] ?></td><!--order column-->
+                                                <td>
+                                                    <?php echo $row22['prosecutionid'] ?>
+                                                </td><!--order column-->
+                                                <td class="middle wrap"><font size="3">
+                                                    <?php echo $row22['prosecutionname'] ?>
+                                                    </font></td>
+                                                <?php
+                                                for($z=1 ; $z <= $categorycount ; $z++)
+                                                { ?>
                                                 <td class="middle wrap">
-                                                    <?php echo $row22['administratorname'] ?>
-                                                </td>
-                                                <td class="middle wrap">
-                                                    <?php echo $row22['administratorappid'] ?>
-                                                </td>
-                                                <td class="middle wrap">
-                                                    <?php echo $row22['administratorapppw'] ?>
-                                                </td>
-                                                <td class="middle wrap">
+                                                    <font size="4">
                                                     <?php
-                                                    if ($row22['administratorrole'] == 1){
-                                                        echo "Administrator";
-                                                    }elseif($row22['administratorrole'] == 2){
-                                                        echo "Power user";
-                                                    }else{
-                                                        echo "User";
+                                                    $result228 = mysqli_query($con,"
+                                                Select category.categoryname,
+                                                  Count(category.categoryid) As count
+                                                From category
+                                                  Inner Join hardware On hardware.categoryid = category.categoryid
+                                                  Inner Join prosecution On prosecution.prosecutionid = hardware.prosecutionid
+                                                Where prosecution.prosecutionid = $row22[prosecutionid] And category.categoryid = $z
+                                                Group By category.categoryname,
+                                                  prosecution.prosecutionid,
+                                                  category.categoryid") or die(mysqli_error($con));
+                                                    while($row228 = mysqli_fetch_assoc($result228)) {
+                                                        echo $row228['count'];
                                                     }
                                                     ?>
+                                                    </font>
                                                 </td>
-                                                <td class="middle wrap">
-                                                    <?php
-                                                    $prosresult = mysqli_query($con, "Select prosecution.prosecutionname,
-  prosecution.prosecutionid
-From administrator_has_prosecution
-  Inner Join prosecution On prosecution.prosecutionid =
-    administrator_has_prosecution.prosecutionid
-  Inner Join administrator On administrator_has_prosecution.administratorid =
-    administrator.administratorid
-Where administrator.administratorid = $row22[administratorid]");
-                                                    while ($pros = $prosresult->fetch_assoc()) {
-                                                        $prosecutionid= $pros['prosecutionid'];
-                                                        $prosecutionname = $pros['prosecutionname'];
-                                                        ?>
-                                                        <a class="btn btn-success btn-rounded  btn-xs" href="#"><?php echo $prosecutionname; ?></a>
-                                                        <?php
-                                                    };
-                                                    ?>
-                                                </td>
+                                                <?php
+                                                }
+                                                ?>
                                             </tr>
                                             <?php
                                         }
@@ -122,6 +152,7 @@ Where administrator.administratorid = $row22[administratorid]");
                                         <tfoot>
                                         <tr>
 
+                                            <th></th>
                                             <th></th>
                                             <th></th>
                                             <th></th>
@@ -148,7 +179,7 @@ Where administrator.administratorid = $row22[administratorid]");
     </div>
 </div>
 <?php
-include_once "modals.php";
+include_once "layout/modals.php";
 ?>
 <!-- Mainly scripts -->
 <script src="js/jquery-3.1.1.min.js"></script>

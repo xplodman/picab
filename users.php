@@ -6,16 +6,16 @@ include_once "php/connection.php";
 
 <?php
 $pageTitle = 'Hardware';
-include_once "header.php";
+include_once "layout/header.php";
 ?>
 <body class="animated fadeIn">
 <div id="wrapper">
     <?php
-    include_once "menu.php";
+    include_once "layout/menu.php";
     ?>
     <div id="page-wrapper" class="gray-bg">
         <?php
-        include_once "topbar.php";
+        include_once "layout/topbar.php";
         ?>
         <div class="row wrapper border-bottom white-bg page-heading animated fadeInLeftBig">
             <div class="col-sm-4">
@@ -146,7 +146,7 @@ Where user_has_hardware.userid =  $row[userid] AND user_has_hardware.status = '1
     </div>
 </div>
 <?php
-include_once "modals.php";
+include_once "layout/modals.php";
 ?>
 <!-- Mainly scripts -->
 <script src="js/jquery-3.1.1.min.js"></script>

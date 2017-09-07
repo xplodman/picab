@@ -14,6 +14,12 @@
         span.arabic {
             font-family: myFirstFont;
         }
+
+
+        .c3 text {
+            font-size:16px;
+            font-family: myFirstFont;
+        }
     </style>
 
     <style type='text/css'>
