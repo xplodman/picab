@@ -1,6 +1,8 @@
 <div id="main">
     <div class="chat-discussion result">
         <?php
+        session_start();
+        $_SESSION['timestamp'] = time();
         include_once "connection.php";
 
         $messagesresult = mysqli_query($con, "Select message.messageid, administrator.administratorname, administrator.administratorid, message.messagedata, message.createddate From message Inner Join administrator On administrator.administratorid = message.administratorid Order By message.createddate Desc LIMIT 100")or die(mysqli_error($con));
