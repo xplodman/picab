@@ -25,17 +25,17 @@ include_once "layout/header.php";
         </div>
         <div class="ibox chat-view animated fadeInRightBig">
             <div class="ibox-title">
-                <small class="pull-right text-muted">
-                    Last message:
-                    <?php
-                    $lastmsg = mysqli_query($con,"Select message.createddate As lastmsg From message Where message.messageid = (Select Max(message.messageid) From message)") or die(mysqli_error($con));
-                    while($lastonemsg = mysqli_fetch_assoc($lastmsg)) {
-                        $sDate = $lastonemsg['lastmsg'];
-                        $newDate = date("j F Y, g:i a", strtotime($sDate));
-                        echo $newDate;
-                    }
-                    ?>
-                </small>
+<!--                <small class="pull-right text-muted">-->
+<!--                    Last message:-->
+<!--                    --><?php
+//                    $lastmsg = mysqli_query($con,"Select message.createddate As lastmsg From message Where message.messageid = (Select Max(message.messageid) From message)") or die(mysqli_error($con));
+//                    while($lastonemsg = mysqli_fetch_assoc($lastmsg)) {
+//                        $sDate = $lastonemsg['lastmsg'];
+//                        $newDate = date("j F Y, g:i a", strtotime($sDate));
+//                        echo $newDate;
+//                    }
+//                    ?>
+<!--                </small>-->
                 Chat room panel
             </div>
             <div class="ibox-content">

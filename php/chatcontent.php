@@ -10,18 +10,22 @@
         while($messages = mysqli_fetch_assoc($messagesresult)){
             ?>
             <div class="chat-message left">
-                <img class="message-avatar" src="img/a1.jpg" alt="" >
+                <img class="message-avatar" src="img/test.jpg" alt="" >
                 <div class="message">
-                    <a class="message-author" href="#"> <?php echo $messages['administratorname'] ?> </a>
+                    <a class="message-author" href="#"> <font size="3"><?php echo $messages['administratorname'] ?> </font></a>
                     <span class="message-date">
-					<?php
-                    echo date("j F Y, g:i a", strtotime($messages['createddate']));;
-                    ?>
+                        <font size="1">
+                            <?php
+                            echo date("j F Y, g:i a", strtotime($messages['createddate']));;
+                            ?>
+                        </font>
 					</span>
                     <span class="message-content">
-					<?php
-                    echo $messages['messagedata'];
-                    ?>
+                        <font size="2">
+                            <?php
+                            echo $messages['messagedata'];
+                            ?>
+                        </font>
 					</span>
                 </div>
             </div>
