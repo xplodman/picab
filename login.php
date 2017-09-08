@@ -21,13 +21,54 @@ include_once "layout/header.php";
     #over4 {
         position: absolute;
     }
-    .img {
+    .maxwidth {
         max-width: 100%;
         max-height: 100%;
     }
     .square {
         height: 267px;
         width: 267px;
+    }
+    @-webkit-keyframes blink {
+        0% {
+            opacity: 1;
+        }
+        50% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+    @-moz-keyframes blink {
+        0% {
+            opacity: 1;
+        }
+        50% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+    @-o-keyframes blink {
+        0% {
+            opacity: 1;
+        }
+        50% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+    .blink {
+        -webkit-animation: blink 1s;
+        -webkit-animation-iteration-count: infinite;
+        -moz-animation: blink 1s;
+        -moz-animation-iteration-count: infinite;
+        -o-animation: blink 1s;
+        -o-animation-iteration-count: infinite;
     }
 </style>
 <?php
@@ -93,10 +134,10 @@ Where administrator_has_prosecution.status = '1' And administrator.administrator
     <div>
         <div class="col-lg-12">
             <div class="square" align="left">
-                <img id="over1" src="img/test1.png" class="animated flip img" >
-                <img id="over2" src="img/test2.png" class="animated flip img" >
-                <img id="over3" src="img/test3.png" class="animated fadeInDownBig img" >
-                <img id="over4" src="img/test4.png" class="animated slideInRight img" >
+                <img id="over1" src="img/test1.png" class="animated flip maxwidth" >
+                <img id="over2" src="img/test2.png" class="animated flip maxwidth" >
+                <img id="over3" src="img/test3.png" class="animated fadeInDownBig maxwidth" >
+                <img id="over4" src="img/test4.png" class="animated slideInRight maxwidth blink" >
             </div>
         </div>
         <div class="col-lg-12">
