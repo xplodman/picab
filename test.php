@@ -1,24 +1,23 @@
-<style>
-    img {
-        max-width: 100%;
-        max-height: 100%;
-    }
-    .square {
-        height: 7px;
-        width: 7px;
-    }
-</style>
-Portrait Div
-<div class="portrait">
-    <img src="http://i.stack.imgur.com/xkF9Q.jpg">
-</div>
+<?php
+include_once "php/connection.php";
 
-Landscape Div
-<div class="landscape">
-    <img src="http://i.stack.imgur.com/xkF9Q.jpg">
-</div>
+$username = "aa";
+$password = "dd";
 
-Square Div
-<div class="square">
-    <img src="http://i.stack.imgur.com/xkF9Q.jpg">
-</div>
+$result = mysqli_query($con, "Select administrator.administratorappid,
+  administrator.administratorapppw,
+  administrator.administratorid,
+  administrator.administratorname,
+  administrator.administratorrole
+From administrator
+Where administrator.administratorappid = $username And administrator.administratorapppw = $password ");
+
+
+
+if (mysqli_num_rows($result) == 0) {
+   echo "hi";
+} else {
+    echo "aaaaaaa";
+
+}
+?>

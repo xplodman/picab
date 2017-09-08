@@ -17,12 +17,39 @@ function active($currect_page){
                             <img alt="image" class="img-circle" src="img/profile_small.jpg" />
                              </span>
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                            <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">Ahmed</strong>
-                             </span> <span class="text-muted text-xs block">System admin<b class="caret"></b></span> </span> </a>
+                            <span class="clear">
+                                <span class="block m-t-xs">
+                                    <strong class="font-bold">
+                                        <?php
+                                        echo $_SESSION['username']
+                                        ?>
+                                    </strong>
+                             </span>
+                                <span class="text-muted text-xs block">
+                                    <?php
+                                    switch ($_SESSION['role'])
+                                    {
+                                        case "1":
+                                            echo "Administrator";
+                                            break;
+                                        case "2":
+                                            echo "Power user";
+                                            break;
+                                        case "3":
+                                            echo "User";
+                                            break;
+                                        default:
+                                            echo "Nothing here...";
+                                    }
+                                    ?>
+                                    <b class="caret"></b>
+                                </span>
+                            </span>
+                        </a>
                         <ul class="dropdown-menu animated fadeInRight m-t-xs">
                             <li><a href="mailbox.html">Mailbox</a></li>
                             <li class="divider"></li>
-                            <li><a href="login.html">Logout</a></li>
+                            <li><a href="php/logout.php">Logout</a></li>
                         </ul>
                     </div>
                     <div class="logo-element">

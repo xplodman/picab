@@ -1,5 +1,6 @@
 <?php
 include_once "php/connection.php";
+ include_once "php/checkauthentication.php";
 ?>
 <!DOCTYPE html>
 <html>

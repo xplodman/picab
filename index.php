@@ -1,5 +1,6 @@
 <?php
 include_once "php/connection.php";
+ include_once "php/checkauthentication.php";
 ?>
 <!DOCTYPE html>
 <html>
@@ -17,6 +18,7 @@ include_once "layout/header.php";
         <?php
         include_once "layout/topbar.php";
         ?>
+<!--        --><?php //echo '<pre>' . print_r($_SESSION, TRUE) . '</pre>'; ?>
         <div class="row wrapper border-bottom white-bg page-heading animated fadeInLeftBig">
             <div class="col-sm-4">
                 <h2><p>Dashboard</p></h2>
@@ -231,7 +233,6 @@ include_once "layout/header.php";
     });
 </script>
 <?php
-include_once "php/connection.php";
 
 $result = mysqli_query($con, "Select category.categoryid,
   category.categoryname
