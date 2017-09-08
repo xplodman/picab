@@ -47,7 +47,7 @@ function active($currect_page){
                             </span>
                         </a>
                         <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                            <li><a href="mailbox.html">Mailbox</a></li>
+                            <li><a href="chat.php">Chat</a></li>
                             <li class="divider"></li>
                             <li><a href="php/logout.php">Logout</a></li>
                         </ul>
@@ -75,6 +75,9 @@ function active($currect_page){
                 </li>
                 <li class="<?php active('prosecutions.php');?>">
                     <a href="prosecutions.php"><i class="fa fa-balance-scale fa-1x"></i> <span class="nav-label">Prosecutions</span></a>
+                </li>
+                <li class="<?php active('chat.php');?>">
+                    <a href="chat.php"><i class="fa fa-comments fa-1x"></i> <span class="nav-label">Chat</span></a>
                 </li>
             </ul>
         </font>

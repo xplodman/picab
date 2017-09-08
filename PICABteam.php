@@ -56,7 +56,7 @@ include_once "layout/header.php";
                                             <th>App ID</th>
                                             <th>App PW</th>
                                             <th>Role</th>
-                                            <th>pros</th>
+                                            <th>Prosecutions</th>
                                         </tr>
                                         </thead>
                                         <tbody>

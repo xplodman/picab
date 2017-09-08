@@ -114,6 +114,7 @@ Where administrator_has_prosecution.status = '1' And administrator.administrator
         $_SESSION['timestamp'] = time();
         $_SESSION["authenticate"] = "true";
         $_SESSION["role"] = $row[administratorrole];
+        $_SESSION["administratorid"] = $row[administratorid];
         $_SESSION["username"] = $row[administratorname];
         $_SESSION["prosecutionname"] = $prosid;
         $_SESSION["prosecutionid"] = $prosname;
@@ -141,25 +142,25 @@ Where administrator_has_prosecution.status = '1' And administrator.administrator
             </div>
         </div>
         <div class="col-lg-12">
-        <form class="m-t" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-            <div class="form-group">
-                <input type="text" class="form-control" placeholder="Username" name="username" required="">
-            </div>
-            <div class="form-group">
-                <input type="password" class="form-control" placeholder="Password" name="password" required="">
-            </div>
-            <button type="Submit"  name="submit" class="btn btn-primary block full-width m-b">Login</button>
-        </form>
+            <form class="m-t" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Username" name="username" required="">
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" placeholder="Password" name="password" required="">
+                </div>
+                <button type="Submit"  name="submit" class="btn btn-primary block full-width m-b">Login</button>
+            </form>
             <?php
             if (isset($_GET['backresult'])){
                 $backresult=$_GET['backresult'];
                 if ($backresult ==  "0") {
-                ?>
-                <div class="alert alert-danger alert-dismissable">
-                    <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-                    Check your username and password.
-                </div>
-                <?php
+                    ?>
+                    <div class="alert alert-danger alert-dismissable">
+                        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                        Check your username and password.
+                    </div>
+                    <?php
                 }
             }
             ?>

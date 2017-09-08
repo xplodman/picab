@@ -83,7 +83,6 @@ include_once "layout/header.php";
                                                 <i class="ace-icon fa fa-undo bigger-110"></i>
                                                 Reset
                                             </button>
-                                            <button class="btn btn-white" type="submit">Cancel</button>
                                             <button class="btn btn-info" type="Submit" name="submit">
                                                 <i class="ace-icon fa fa-check bigger-110"></i>
                                                 Submit
