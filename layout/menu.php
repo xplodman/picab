@@ -79,6 +79,9 @@ function active($currect_page){
                 <li class="<?php active('chat.php');?>">
                     <a href="chat.php"><i class="fa fa-comments fa-1x"></i> <span class="nav-label">Chat</span></a>
                 </li>
+                <li class="<?php active('network.php');?>">
+                    <a href="network.php"><i class="fa fa-connectdevelop  fa-1x"></i> <span class="nav-label">Network</span></a>
+                </li>
             </ul>
         </font>
     </div>
