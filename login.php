@@ -135,8 +135,7 @@ Where administrator_has_prosecution.status = '1' And administrator.administrator
     <div>
         <div class="col-lg-12">
             <div class="square" align="left">
-                <img id="over1" src="img/test1.png" class="animated flip maxwidth" >
-                <img id="over2" src="img/test2.png" class="animated flip maxwidth" >
+                <img id="over1" src="img/test1&2.png" class="animated flip maxwidth " >
                 <img id="over3" src="img/test3.png" class="animated fadeInDownBig maxwidth" >
                 <img id="over4" src="img/test4.png" class="animated slideInRight maxwidth blink" >
             </div>
