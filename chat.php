@@ -119,7 +119,7 @@ include_once "layout/modals.php";
     window.setInterval(function(){
         $('#main').load('php/chatcontent.php #main', function() {
             /// can add another function here
-        });}, 5000);
+        });}, 500);
 </script>
 </body>
 </html>
